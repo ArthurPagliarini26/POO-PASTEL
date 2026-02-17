@@ -125,23 +125,75 @@ public class Estoque {
                     }
                 } else if(opcaoMenuCliente == 2) {
 
-                    String nome = atendente.comprarpastel();
-                    int numeroPasteis = atendente.numeroPasteis();
-                    boolean comprado = false;
-                    
-                    
-                    for(Produto pastel : listaProdutos) {
-                        if(pastel.getNome().equalsIgnoreCase(nome)) {
-                            comprado = true;
-                            break;
+                    String nome = atendente.comprarPastel();
+                    int quantidade = atendente.numeroPasteis();
+                
+                    boolean encontrado = false;
+                
+                    for (Produto p : listaProdutos) {
+                
+                        if (p instanceof Pastel) {
+                
+                            Pastel pastel = (Pastel) p;
+                
+                            if (pastel.getNome().equalsIgnoreCase(nome)) {
+                
+                                encontrado = true;
+                
+                                if (pastel.getEstoque() >= quantidade) {
+                
+                                    pastel.setEstoque(pastel.getEstoque() - quantidade);
+                
+                                    System.out.println("=== Compra realizada com sucesso ===");
+                
+                                } else {
+                
+                                    System.out.println("=== Estoque insuficiente ===");
+                                }
+                
+                                break;
+                            }
                         }
                     }
-
-                    if(comprado) {
-                        System.out.println("===Compra Realizada Com Sucesso===");
-
-                    } else {
-                        System.out.println("===O Sabor de Pastél Não Está Disponível===");
+                
+                    if (!encontrado) {
+                        System.out.println("=== Pastel não encontrado ===");
+                    }
+                    
+                } else if(opcaoMenuCliente == 3) {
+                    String nome = atendente.comprarSuco();
+                    int quantidade = atendente.numeroSucos();
+                
+                    boolean encontrado = false;
+                
+                    for (Produto p : listaProdutos) {
+                
+                        if (p instanceof Suco) {
+                
+                            Suco suco = (Suco) p;
+                
+                            if (suco.getNome().equalsIgnoreCase(nome)) {
+                
+                                encontrado = true;
+                
+                                if (suco.getEstoque() >= quantidade) {
+                
+                                    suco.setEstoque(suco.getEstoque() - quantidade);
+                
+                                    System.out.println("=== Compra realizada com sucesso ===");
+                
+                                } else {
+                
+                                    System.out.println("=== Estoque insuficiente ===");
+                                }
+                
+                                break;
+                            }
+                        }
+                    }
+                
+                    if (!encontrado) {
+                        System.out.println("=== Suco não encontrado ===");
                     }
                 }
                 

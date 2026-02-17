@@ -54,6 +54,8 @@ public class Atendente {
         
     }
 
+    
+
     public double precoProduto() {
         System.out.print("Digite o preço do produto: ");
         return leitor.nextDouble();
@@ -70,8 +72,14 @@ public class Atendente {
         return leitor.nextLine();
     }
 
-    public String comprarpastel() {
+    public String comprarPastel() {
         System.out.print("Qual sabor de pastel você vai comprar: ");
+        leitor.nextLine();
+        return leitor.nextLine();
+    }
+
+    public String comprarSuco() {
+        System.out.print("Qual sabor de suco você vai comprar: ");
         leitor.nextLine();
         return leitor.nextLine();
     }
@@ -98,5 +106,11 @@ public class Atendente {
         System.out.print("Quantos pastéis você quer comprar: ");
         return leitor.nextInt();
     }
+
+    public int numeroSucos() {
+        System.out.print("Quantos sucos você quer comprar: ");
+        return leitor.nextInt();
+    }
+
 
 }

@@ -9,6 +9,7 @@ public abstract class Produto {
     public Produto(String nome, double preco, int estoque) {
         this.preco = preco;
         this.estoque = estoque;
+        this.nome = nome;
     }
 
     public abstract String infoProduto();

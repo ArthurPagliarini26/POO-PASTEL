@@ -16,7 +16,13 @@ public class Pastelaria {
 
 
         } while(opcao != 0);
+
+        System.out.println("Saindo... Até logo.");
+
+
     }
+
+       
 
 
 
