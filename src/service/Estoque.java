@@ -1,16 +1,16 @@
 package service;
 
 import view.Atendente;
-import model.Pastel;
+import model.*;
 import java.util.*;
 
 public class Estoque {
 
-    List<Pastel> listaPasteis;
+    List<Produto> listaProdutos;
 
     public Estoque() {
-        listaPasteis = new ArrayList<>();
-    }
+        listaProdutos = new ArrayList<>();
+    } 
 
     public void gerenciarEstoque(int opcao, Atendente atendente) {
 
@@ -31,21 +31,32 @@ public class Estoque {
                 }
                 if(opcaoMenuFuncionario == 1) {
 
+                    String nome = atendente.nomeProduto();
                     String sabor = atendente.saborPastel();
-                    double preco = atendente.precoPastel();
-                    int estoque = atendente.estoquePastel();
+                    double preco = atendente.precoProduto();
+                    int estoque = atendente.estoqueProduto();
 
-                    Pastel pastel = new Pastel(sabor, preco, estoque);
-                    listaPasteis.add(pastel);
+                    Produto pastel = new Pastel(sabor, preco, estoque, nome);
+                    listaProdutos.add(pastel);
 
                 } else if(opcaoMenuFuncionario == 2) {
 
-                    String nome = atendente.removerPastel();
+                    String nome = atendente.nomeProduto();
+                    String saborFruta = atendente.saborFruta();
+                    double preco = atendente.precoProduto();
+                    int estoque = atendente.estoqueProduto();
+
+                    Produto suco = new Suco(saborFruta, preco, estoque, nome);
+                    listaProdutos.add(suco);
+                
+                } else if(opcaoMenuFuncionario == 3) {
+
+                    String nome = atendente.removerProduto();
                     boolean removido = false;
 
-                    for(Pastel pastel : listaPasteis) {
-                        if(pastel.getSabor().equalsIgnoreCase(nome)) {
-                            listaPasteis.remove(pastel);
+                    for(Produto produto : listaProdutos) {
+                        if(produto.getNome().equalsIgnoreCase(nome)) {
+                            listaProdutos.remove(produto);
                             removido = true;
                             break;
 
@@ -78,28 +89,51 @@ public class Estoque {
 
                 if(opcaoMenuCliente == 1) {
 
-                    if(listaPasteis.isEmpty()) {
-
-                        System.out.println("===Estamos sem pastéis no momento===");
-
+                    if (listaProdutos.isEmpty()) {
+                        System.out.println("=== Nenhum produto cadastrado ===");
                     } else {
-
-                        for(Pastel pastel : listaPasteis) {
-                            System.out.println("===" + pastel.getSabor() +"===");
-                            atendente.visualizarCardapio(pastel);
+                    
+                        System.out.println("===== PASTÉIS =====");
+                    
+                        boolean temPastel = false;
+                    
+                        for (Produto p : listaProdutos) {
+                            if (p instanceof Pastel) {
+                                System.out.println(p.infoProduto());
+                                temPastel = true;
+                            }
+                        }
+                    
+                        if (!temPastel) {
+                            System.out.println("Nenhum pastel disponível.");
+                        }
+                    
+                        System.out.println("\n===== SUCOS =====");
+                    
+                        boolean temSuco = false;
+                    
+                        for (Produto p : listaProdutos) {
+                            if (p instanceof Suco) {
+                                System.out.println(p.infoProduto());
+                                temSuco = true;
+                            }
+                        }
+                    
+                        if (!temSuco) {
+                            System.out.println("Nenhum suco disponível.");
                         }
                     }
                 } else if(opcaoMenuCliente == 2) {
 
                     String nome = atendente.comprarpastel();
+                    int numeroPasteis = atendente.numeroPasteis();
                     boolean comprado = false;
-
-                    for(Pastel pastel : listaPasteis) {
-                        if(pastel.getSabor().equalsIgnoreCase(nome)) {
+                    
+                    
+                    for(Produto pastel : listaProdutos) {
+                        if(pastel.getNome().equalsIgnoreCase(nome)) {
                             comprado = true;
                             break;
-
-
                         }
                     }
 
