@@ -64,12 +64,54 @@ public class Estoque {
                     }
 
                     if(removido) {
-                        System.out.println("===Pastél Removido com Sucesso===");
+                        System.out.println("===Produto Removido com Sucesso===");
 
                     } else {
-                        System.out.println("===Pastél Não Existente===");
+                        System.out.println("===Pastel Não Existente===");
                     }
-                }
+                } else if(opcaoMenuFuncionario == 4) {
+
+                    String nome = atendente.atualizarProduto();
+                    boolean encontrado = false;
+                    
+                    for (Produto produto : listaProdutos) {
+                    
+                        if (produto.getNome().equalsIgnoreCase(nome)) {
+                    
+                            encontrado = true;
+                    
+                            String novoNome = atendente.NoveNomeProduto();
+                            double novoPreco = atendente.NovoPrecoProduto();
+                            int novoEstoque = atendente.NovoEstoqueProduto();
+                    
+                            produto.setNome(novoNome);
+                            produto.setPreco(novoPreco);
+                            produto.setEstoque(novoEstoque);
+                    
+                            if (produto instanceof Pastel) {
+                                String novoSabor = atendente.NovoSaborPastel();
+                                ((Pastel) produto).setSabor(novoSabor);
+                    
+                            } else if (produto instanceof Suco) {
+                                String novoSabor = atendente.NovoSaborFruta();
+                                ((Suco) produto).setSaborFruta(novoSabor);
+                            }
+                    
+                            System.out.println("=== Produto Atualizado Com Sucesso ===");
+                            break;
+                        }
+                    }
+                    
+                    if (!encontrado) {
+                        System.out.println("=== O Produto Não Foi Encontrado ===");
+                    }
+
+                    
+
+                          }
+
+
+                
                } while(opcaoMenuFuncionario != 0);
             }
             break;
